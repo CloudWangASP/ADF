@@ -48,28 +48,10 @@
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
-                android:text="点击见证奇迹的时刻"
-                android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:text="点击播放"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:tag="desc"
-                android:text="要做个有情怀的程序员"
-                android:textColor="@android:color/white"
-                android:textSize="35sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginLeft="100dp"
-                android:layout_marginTop="10dp"
-                android:text="        --- Cloud.Wang"
-                android:textColor="@android:color/white"
-                android:textSize="25sp" />
         </LinearLayout>
 
     </com.example.adminuser.adf.DragViewLayout>

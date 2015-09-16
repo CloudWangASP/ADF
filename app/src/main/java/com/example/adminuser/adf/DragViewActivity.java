@@ -53,7 +53,7 @@ public class DragViewActivity extends Activity {
         mListView = (ListView) findViewById(R.id.listView);
         SampleAdapter adapter = new SampleAdapter(this);
         for (int i = 0; i < 20; i++) {
-            adapter.add(new SampleItem("Cloud 好帅！！！！！", android.R.drawable.star_on));
+            adapter.add(new SampleItem("Cloud", android.R.drawable.star_on));
         }
         mListView.setAdapter(adapter);
     }

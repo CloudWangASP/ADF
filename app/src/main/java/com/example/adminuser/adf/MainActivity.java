@@ -51,9 +51,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
-        getJSONByVolley();
-        loadImageByVolley();
-        showImageByNetworkImageView();
+//        getJSONByVolley();
+//        loadImageByVolley();
+//        showImageByNetworkImageView();
     }
 
     @Click
