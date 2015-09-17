@@ -27,6 +27,9 @@ dependencies {
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     compile 'com.android.support:appcompat-v7:22.0.0'
+    compile project(':flyrefresh')
+    compile 'com.android.support:recyclerview-v7:22.1.1'
+    compile 'jp.wasabeef:recyclerview-animators:1.2.0@aar'
 }
 
 apt {

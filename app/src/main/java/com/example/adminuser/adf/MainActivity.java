@@ -1,14 +1,27 @@
 package com.example.adminuser.adf;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.util.LruCache;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +36,7 @@ import com.android.volley.toolbox.ImageLoader.ImageCache;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
+import com.example.cloudwang.flyrefresh.flyrefresh.FlyRefreshLayout;
 import com.ypy.eventbus.EventBus;
 
 import org.androidannotations.annotations.Click;
@@ -30,8 +44,14 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
 @EActivity(R.layout.activity_main)
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity implements FlyRefreshLayout.OnPullRefreshListener {
 
     @ViewById
     Button btn;
@@ -41,6 +61,15 @@ public class MainActivity extends ActionBarActivity {
     NetworkImageView mNetworkImageView;
     @ViewById
     ImageView mImageView;
+    @ViewById
+    FlyRefreshLayout mFlylayout;
+    @ViewById
+    RecyclerView mListView;
+
+    private ItemAdapter mAdapter;
+    private ArrayList<ItemData> mDataSet = new ArrayList<>();
+    private Handler mHandler = new Handler();
+    private LinearLayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +83,21 @@ public class MainActivity extends ActionBarActivity {
 //        getJSONByVolley();
 //        loadImageByVolley();
 //        showImageByNetworkImageView();
+        initDataSet();
+        mFlylayout.setOnPullRefreshListener(this);
+        mLayoutManager = new LinearLayoutManager(this);
+        mListView.setLayoutManager(mLayoutManager);
+        mAdapter = new ItemAdapter(this);
+        mListView.setAdapter(mAdapter);
+        mListView.setItemAnimator(new SampleItemAnimator());
     }
 
-    @Click
-    void btn(){
-        Intent intent = new Intent(getApplicationContext(),
-                DragViewActivity_.class);
-        startActivity(intent);
-    }
+//    @Click
+//    void btn(){
+//        Intent intent = new Intent(getApplicationContext(),
+//                DragViewActivity_.class);
+//        startActivity(intent);
+//    }
 
     public void onEventMainThread(FirstEvent event) {
         String msg = "onEventMainThread收到了消息：" + event.getmMsg();
@@ -176,5 +212,105 @@ public class MainActivity extends ActionBarActivity {
         ImageLoader imageLoader = new ImageLoader(requestQueue, imageCache);
         mNetworkImageView.setTag("url");
         mNetworkImageView.setImageUrl(imageUrl, imageLoader);
+    }
+
+    private void initDataSet() {
+        mDataSet.add(new ItemData(Color.parseColor("#76A9FC"), R.mipmap.ic_assessment_white_24dp, "Meeting Minutes", new Date(2014 - 1900, 2, 9)));
+        mDataSet.add(new ItemData(Color.GRAY, R.mipmap.ic_folder_white_24dp, "Favorites Photos", new Date(2014 - 1900, 1, 3)));
+        mDataSet.add(new ItemData(Color.GRAY, R.mipmap.ic_folder_white_24dp, "Photos", new Date(2014 - 1900, 0, 9)));
+    }
+
+    private void addItemData() {
+        ItemData itemData = new ItemData(Color.parseColor("#FFC970"), R.mipmap.ic_smartphone_white_24dp, "Magic Cube Show", new Date());
+        mDataSet.add(0, itemData);
+        mAdapter.notifyItemInserted(0);
+        mLayoutManager.scrollToPosition(0);
+    }
+
+    @Override
+    public void onRefresh(FlyRefreshLayout view) {
+        View child = mListView.getChildAt(0);
+        if (child != null) {
+            bounceAnimateView(child.findViewById(R.id.icon));
+        }
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mFlylayout.onRefreshFinish();
+            }
+        }, 1000);
+    }
+
+    private void bounceAnimateView(View view) {
+        if (view == null) {
+            return;
+        }
+
+        Animator swing = ObjectAnimator.ofFloat(view, "rotationX", 0, 30, -20, 0);
+        swing.setDuration(400);
+        swing.setInterpolator(new AccelerateInterpolator());
+        swing.start();
+    }
+
+    @Override
+    public void onRefreshAnimationEnd(FlyRefreshLayout view) {
+        addItemData();
+    }
+
+    private class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
+
+        private LayoutInflater mInflater;
+        private DateFormat dateFormat;
+
+        public ItemAdapter(Context context) {
+            mInflater = LayoutInflater.from(context);
+            dateFormat = SimpleDateFormat.getDateInstance(DateFormat.DEFAULT, Locale.ENGLISH);
+        }
+
+        @Override
+        public ItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            View view = mInflater.inflate(R.layout.view_list_item, viewGroup, false);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(),
+                            DragViewActivity_.class);
+                    startActivity(intent);
+                }
+            });
+            return new ItemViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(ItemViewHolder itemViewHolder, int i) {
+            final ItemData data = mDataSet.get(i);
+            ShapeDrawable drawable = new ShapeDrawable(new OvalShape());
+            drawable.getPaint().setColor(data.color);
+            itemViewHolder.icon.setBackgroundDrawable(drawable);
+            itemViewHolder.icon.setImageResource(data.icon);
+            itemViewHolder.title.setText(data.title);
+            itemViewHolder.subTitle.setText(dateFormat.format(data.time));
+        }
+
+        @Override
+        public int getItemCount() {
+            return mDataSet.size();
+        }
+    }
+
+    private static class ItemViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView icon;
+        TextView title;
+        TextView subTitle;
+
+        public ItemViewHolder(View itemView) {
+            super(itemView);
+            icon = (ImageView) itemView.findViewById(R.id.icon);
+            title = (TextView) itemView.findViewById(R.id.title);
+            subTitle = (TextView) itemView.findViewById(R.id.subtitle);
+        }
+
     }
 }
