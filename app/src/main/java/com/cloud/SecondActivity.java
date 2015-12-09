@@ -1,4 +1,4 @@
-package com.example.adminuser.adf;
+package com.cloud;
 
 import android.content.Intent;
 import android.os.Bundle;

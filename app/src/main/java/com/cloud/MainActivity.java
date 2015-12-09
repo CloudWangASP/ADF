@@ -1,4 +1,4 @@
-package com.example.adminuser.adf;
+package com.cloud;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -39,7 +39,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.cloudwang.flyrefresh.flyrefresh.FlyRefreshLayout;
 import com.ypy.eventbus.EventBus;
 
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.json.JSONObject;
@@ -215,13 +214,13 @@ public class MainActivity extends AppCompatActivity implements FlyRefreshLayout.
     }
 
     private void initDataSet() {
-        mDataSet.add(new ItemData(Color.parseColor("#76A9FC"), R.mipmap.ic_assessment_white_24dp, "Meeting Minutes", new Date(2014 - 1900, 2, 9)));
+        mDataSet.add(new com.cloud.ItemData(Color.parseColor("#76A9FC"), R.mipmap.ic_assessment_white_24dp, "Meeting Minutes", new Date(2014 - 1900, 2, 9)));
         mDataSet.add(new ItemData(Color.GRAY, R.mipmap.ic_folder_white_24dp, "Favorites Photos", new Date(2014 - 1900, 1, 3)));
         mDataSet.add(new ItemData(Color.GRAY, R.mipmap.ic_folder_white_24dp, "Photos", new Date(2014 - 1900, 0, 9)));
     }
 
     private void addItemData() {
-        ItemData itemData = new ItemData(Color.parseColor("#FFC970"), R.mipmap.ic_smartphone_white_24dp, "Magic Cube Show", new Date());
+        com.cloud.ItemData itemData = new ItemData(Color.parseColor("#FFC970"), R.mipmap.ic_smartphone_white_24dp, "Magic Cube Show", new Date());
         mDataSet.add(0, itemData);
         mAdapter.notifyItemInserted(0);
         mLayoutManager.scrollToPosition(0);

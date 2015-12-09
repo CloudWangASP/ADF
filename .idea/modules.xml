@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ADF.iml" filepath="$PROJECT_DIR$/ADF.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CloudBase.iml" filepath="$PROJECT_DIR$/CloudBase.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/flyrefresh/flyrefresh.iml" filepath="$PROJECT_DIR$/flyrefresh/flyrefresh.iml" />
     </modules>

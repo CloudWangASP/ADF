@@ -1,4 +1,4 @@
-package com.example.adminuser.adf;
+package com.cloud;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
+
 
 import jp.wasabeef.recyclerview.animators.BaseItemAnimator;
 

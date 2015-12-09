@@ -1,4 +1,4 @@
-package com.example.adminuser.adf;
+package com.cloud;
 
 /**
  * Created by Cloud on 15/5/19.

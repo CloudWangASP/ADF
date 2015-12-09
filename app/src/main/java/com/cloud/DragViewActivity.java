@@ -1,4 +1,4 @@
-package com.example.adminuser.adf;
+package com.cloud;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,6 +16,8 @@ import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
+
+import com.cloud.R;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -45,7 +47,7 @@ public class DragViewActivity extends Activity {
     void btn(){
         MediaController mController = new MediaController(this);
         viewHeader.setMediaController(mController);
-        viewHeader.setVideoURI(Uri.parse("android.resource://com.example.adminuser.adf/"+R.raw.video));
+        viewHeader.setVideoURI(Uri.parse("android.resource://com.cloud/"+R.raw.video));
         viewHeader.start();
     }
 

@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.adminuser.adf.SecondActivity">
+    tools:context="com.cloud.adminuser.cloud.SecondActivity">
 
     <Button
         android:id="@+id/btn_FirstEvent"
