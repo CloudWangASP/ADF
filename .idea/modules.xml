@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CloudBase.iml" filepath="$PROJECT_DIR$/CloudBase.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CloudDevKit/CloudDevKit.iml" filepath="$PROJECT_DIR$/CloudDevKit/CloudDevKit.iml" />
       <module fileurl="file://$PROJECT_DIR$/flyrefresh/flyrefresh.iml" filepath="$PROJECT_DIR$/flyrefresh/flyrefresh.iml" />
     </modules>
   </component>
