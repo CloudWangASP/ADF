@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#ffffff</color>
+    <color name="theme_red">#FC5C63</color>
+
+    <color name="titlebar_item_color_pressed">#20000000</color>
+
+
+    <color name="background_tab_pressed">#6633B5E5</color>
+</resources>

@@ -5,4 +5,16 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_base">BaseActivity</string>
     <string name="title_activity_second">SecondActivity</string>
+
+    <string name="download_apk_file_fail">对不起，下载应用包失败！</string>
+    <string name="connect_server_fail">连接服务失败，请确认网络是否通畅！</string>
+    <string name="has_no_network">无法连接，请确认网络是否可用！</string>
+    <string name="download_title_string">正在下载应用</string>
+    <string name="download_tip_string">请稍候...</string>
+    <string name="network_params_fail">网络参数异常</string>
+
+    <!-- switch -->
+
+    <string name="switch_on">ON</string>
+    <string name="switch_off">OFF</string>
 </resources>

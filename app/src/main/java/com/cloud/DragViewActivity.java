@@ -17,7 +17,6 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import com.cloud.R;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;

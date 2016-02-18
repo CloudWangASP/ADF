@@ -15,7 +15,6 @@ public class BaseActivity extends Activity {
     Context context = this.getApplicationContext();
     ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
